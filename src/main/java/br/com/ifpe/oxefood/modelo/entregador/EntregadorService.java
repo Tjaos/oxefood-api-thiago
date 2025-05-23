@@ -48,6 +48,16 @@ public class EntregadorService {
     }
 
     public Entregador obterPorID(Long id) {
-        return repository.findById(id).get();
+        return repository.findById(id).orElseThrow(() -> new RuntimeException("Entregador não encontrado"));
     }
+
+    @Transactional
+    public void delete(Long id) {
+
+        Entregador entregador = repository.findById(id).get();
+        entregador.setHabilitado(Boolean.FALSE);
+
+        repository.save(entregador);
+    }
+
 }

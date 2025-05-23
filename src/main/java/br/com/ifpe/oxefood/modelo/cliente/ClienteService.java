@@ -39,4 +39,14 @@ public class ClienteService {
     public Cliente obterPorID(Long id) {
         return repository.findById(id).orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
     }
+
+    @Transactional
+    public void delete(Long id) {
+
+        Cliente cliente = repository.findById(id).get();
+        cliente.setHabilitado(Boolean.FALSE);
+
+        repository.save(cliente);
+    }
+
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.ifpe.oxefood.modelo.cliente.Cliente;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -41,4 +42,14 @@ public class ProdutoService {
     public List<Produto> listarTodos() {
         return repository.findAll();
     }
+
+    @Transactional
+    public void delete(Long id) {
+
+        Produto produto = repository.findById(id).get();
+        produto.setHabilitado(Boolean.FALSE);
+
+        repository.save(produto);
+    }
+
 }
