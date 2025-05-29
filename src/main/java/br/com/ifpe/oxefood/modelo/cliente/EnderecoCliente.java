@@ -25,7 +25,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class EnderecoCliente extends EntidadeAuditavel {
 
-    @JsonIgnore
+    @JsonIgnore //Interrompe o ciclo infinito de (cliente buscar endereço, endereço buscar cliente...)
     @ManyToOne
     private Cliente cliente;
 
