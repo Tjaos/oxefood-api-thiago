@@ -23,46 +23,46 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Entregador extends EntidadeAuditavel {
 
-    @Column
+    @Column(nullable = false, length = 100)
     private String nome;
 
-    @Column
+    @Column(nullable = false)
     private LocalDate dataNascimento;
 
-    @Column
+    @Column(unique = true, nullable = false, length = 14)
     private String cpf;
 
-    @Column
+    @Column(unique=true, nullable = false, length = 10)
     private String rg;
 
-    @Column
+    @Column(nullable = false)
     private Integer qtdEntregasRealizadas;
 
-    @Column
+    @Column(nullable = false)
     private Double valorFrete;
 
-    @Column
+    @Column(nullable = false, length = 200)
     private String enderecoRua;
 
-    @Column
+    @Column(nullable = false, length = 10)
     private String enderecoNumero;
 
-    @Column
+    @Column(nullable = false, length = 100)
     private String enderecoBairro;
 
-    @Column
+    @Column(nullable = false, length = 100)
     private String enderecoCidade;
 
-    @Column
+    @Column(nullable = false, length = 2)
     private String enderecoUf;
 
-    @Column
+    @Column(nullable = false, length = 10)
     private String enderecoCep;
 
-    @Column
+    @Column(nullable = false, length = 100)
     private String enderecoComplemento;
 
-    @Column
+    @Column(nullable = false, length = 20)
     private String foneCelular;
 
     @Column

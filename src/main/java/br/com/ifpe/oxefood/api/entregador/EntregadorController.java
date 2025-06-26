@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import br.com.ifpe.oxefood.modelo.entregador.Entregador;
 import br.com.ifpe.oxefood.modelo.entregador.EntregadorService;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/entregador")
@@ -24,6 +25,14 @@ public class EntregadorController {
 
     @Autowired
     private EntregadorService entregadorService;
+
+    @PostMapping
+    public ResponseEntity<Entregador> save(@RequestBody @Valid EntregadorRequest request) {
+
+        Entregador entregador = entregadorService.save(request.build());
+        return new ResponseEntity<>(entregador, HttpStatus.CREATED);
+
+    }
 
     @GetMapping
     public List<Entregador> listarTodos() {
@@ -42,13 +51,7 @@ public class EntregadorController {
         return entregadorService.obterPorID(id);
     }
 
-    @PostMapping
-    public ResponseEntity<Entregador> save(@RequestBody EntregadorRequest request) {
 
-        Entregador entregador = entregadorService.save(request.build());
-        return new ResponseEntity<>(entregador, HttpStatus.CREATED);
-
-    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
