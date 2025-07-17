@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.ifpe.oxefood.modelo.produto.CategoriaProdutoService;
@@ -33,7 +34,7 @@ public class ProdutoController {
 
     @PostMapping
     public ResponseEntity<Produto> save(@RequestBody @Valid ProdutoRequest request) {
-        
+
         Produto produtoNovo = request.build();
         produtoNovo.setCategoria(categoriaProdutoService.obterPorID(request.getIdCategoria()));
         Produto produto = produtoService.save(produtoNovo);
@@ -45,6 +46,7 @@ public class ProdutoController {
     public List<Produto> listarTodos() {
         return produtoService.listarTodos();
     }
+
     @GetMapping("/{id}")
     public Produto obterPorID(@PathVariable Long id) {
         return produtoService.obterPorID(id);
@@ -66,5 +68,13 @@ public class ProdutoController {
         return ResponseEntity.ok().build();
     }
 
+    @PostMapping("/filtrar")
+    public List<Produto> filtrar(
+            @RequestParam(value = "codigo", required = false) String codigo,
+            @RequestParam(value = "titulo", required = false) String titulo,
+            @RequestParam(value = "idCategoria", required = false) Long idCategoria) {
+
+        return produtoService.filtrar(codigo, titulo, idCategoria);
+    }
 
 }

@@ -4,6 +4,7 @@ import br.com.ifpe.oxefood.modelo.produto.Produto;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,7 +25,7 @@ public class ProdutoRequest {
     @NotNull(message = "O Título é de preenchimento obrigatório")
     private String titulo;
 
-    @Max(value = 500, message = "A Descrição deve ter no máximo {value} caracteres")
+    @Size(max = 500, message = "A Descrição deve ter no máximo {value} caracteres")
     private String descricao;
 
     @Min(value = 5, message = "O Valor Unitário não pode ser menor que {value}")
@@ -45,5 +46,5 @@ public class ProdutoRequest {
                 .tempoEntregaMinimo(tempoEntregaMinimo)
                 .tempoEntregaMaximo(tempoEntregaMaximo)
                 .build();
-    }  
+    }
 }
